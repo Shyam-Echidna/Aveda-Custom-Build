@@ -1,0 +1,67 @@
+<nav am-layout="vertical aveda-left-nav">
+	<a href="#"><img src="assets/images/aveda_logo_white.png" alt="Aveda"></a>
+	<a ui-sref-active="active" ui-sref="base.news"><i class="fa fa-newspaper-o"></i> News <recent-news></recent-news></a>
+	<a ui-sref-active="active" ui-sref="base.promotions"><i class="fa fa-bullhorn"></i> Promotions</a>
+	<a ui-sref-active="active"><i class="fa fa-cog"></i> My Profile</a>
+	<!-- <div class="left-nav-dropdown" role="dropdown" auto-close="disabled" dropdown>
+		<button type="button" dropdown-toggle>
+			<i class="fa fa-chevron-up"></i>
+			<i class="fa fa-archive"></i>
+			My Orders
+		</button>
+		<nav dropdown-menu>
+			<a href="">Order History</a>
+			<a href="">Pending Orders</a>
+			<a href="">User Orders</a>
+		</nav>
+	</div> -->
+	<!-- accordian -->
+	
+  		<!-- <div class="list-group panel">  -->   
+    		<a href="#subOrders" ng-click="base.isCollapsed = !base.isCollapsed" class="" data-toggle="collapse" data-target="#subOrders">
+    			
+				<i class="fa fa-archive"></i>
+				My Orders
+				<i class="fa " ng-class="{'fa-chevron-down': base.isCollapsed, 'fa-chevron-up': !base.isCollapsed}"></i>
+			</a>
+    		<div class="collapse" id="subOrders">
+      			<a href="" class="order">Order History</a>
+      			<a href="" class="order">Pending Orders</a>
+      			<a href="" class="order">User Orders</a>
+    		</div>
+  		<!-- </div> -->
+		<!-- <div id="demo" class="collapse">
+    <ul>
+       <li>1</li>
+       <li>2</li>
+       <li>3</li>
+    </ul>
+  </div> -->
+	<!--  -->
+	<a ui-sref-active="active"><i class="fa fa-scissors"></i> My Salons</a>
+	<a ui-sref-active="active" ui-sref="base.myusers"><i class="fa fa-user"></i> My Users</a>
+	<!-- <div class="left-nav-dropdown" role="dropdown" dropdown auto-close="disabled">
+		<button type="button" dropdown-toggle>
+			<i class="fa fa-chevron-up"></i>
+			<i class="fa fa-flag"></i>
+			Submit Claim
+		</button>
+		<nav dropdown-menu>
+			<a href="">Order Claim</a>
+			<a href="">Non-Order Claim</a>
+		</nav>
+	</div> -->
+	<a href="#subClaims" class="" ng-click="base.subClaimsisCollapsed = !base.subClaimsisCollapsed" data-toggle="collapse" data-target="#subClaims">
+    		
+				<i class="fa fa-flag"></i>
+				Submit Claim
+				<i class="fa " ng-class="{'fa-chevron-down': base.subClaimsisCollapsed, 'fa-chevron-up': !base.subClaimsisCollapsed}"></i>
+			</a>
+    		<div class="collapse" id="subClaims">
+      			<a href="" class="order">Order Claim</a>
+      			<a href="" class="order">Non-Order Claim</a>
+    		</div>
+	<a ui-sref-active="active"><i class="fa fa-thumbs-down"></i> Client Dislike</a>
+	<a ui-sref-active="active" ng-if="application.$ocMedia('orientation:portrait')"><i class="fa fa-eye"></i> Browse</a>
+</nav>
+<!-- <p class="am-text-c"><small>Copyright &#169; 2015, Aveda</small></p> -->

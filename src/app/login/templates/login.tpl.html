@@ -1,0 +1,67 @@
+<div class="login">
+    <div class="order-cloud-image"></div>
+    <section class="order-cloud">
+        <div id="login_box">
+            <div id="login_form" class="animated bounceIn">
+                <div class="LogoSection col-lg-6 col-xs-12">
+                    <img src="assets/images/aveda_logo_white.png">
+                </div>
+                <div class="form_div col-lg-6 col-xs-12">
+                    <form class="form-signin" ng-submit="login.submit(login.credentials)" name="login_form">
+                        <h2 class="animated fadeIn text-center login-head">Login to your account</h2>
+                        <div class="login_tab"><a href="#" class="tab_active logtab">LOGIN</a><a href="#" class="logtab">FORGOT PASSWORD</a></div>
+                        <p id="451qa_msg_login" ng-show="loginMessage" ng-bind-html="loginMessage" class="alert alert-info"></p>
+                        <div>
+                            <div class="view-form-icon" ng-show="!showEmailHelp">
+                                <div class="input-group login-section">
+                                    <!-- <label ng-show="login.credentials.Username">User Name</label> -->
+                                    <span class="input-group-addon login_icon" id="basic-addon1"><svg class="login-logo" enable-background="new 0 0 32 32" height="32px" id="Layer_1" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M22.417,14.836c-1.209,2.763-3.846,5.074-6.403,5.074c-3.122,0-5.39-2.284-6.599-5.046   c-7.031,3.642-6.145,12.859-6.145,12.859c0,1.262,0.994,1.445,2.162,1.445h10.581h10.565c1.17,0,2.167-0.184,2.167-1.445   C28.746,27.723,29.447,18.479,22.417,14.836z" fill="#515151"/><path d="M16.013,18.412c3.521,0,6.32-5.04,6.32-9.204c0-4.165-2.854-7.541-6.375-7.541   c-3.521,0-6.376,3.376-6.376,7.541C9.582,13.373,12.491,18.412,16.013,18.412z" fill="#515151"/></g></svg></span>
+                                    <!-- <span class="input-group-addon login_icon success" ng-hide="true"><img src="assets/images/correct.png"></span>
+                                    <span class="input-group-addon login_icon error" ng-hide="true"><img src="assets/images/incorrect.png"></span> -->
+                                    <input autofocus class="form-control inp-login" type="text" ng-model="login.credentials.Username" placeholder="Username" aria-describedby="basic-addon1" />
+                                    <!-- <i class="fa fa-user"></i> -->
+                                </div>
+                                <div ng-show="!PasswordSecurityException" class="input-group login-section">
+                                    <!-- <label ng-show="login.credentials.Password">Password</label> -->
+                                    <span class="input-group-addon login_icon" id="basic-addon2"><svg class="passwd-logo" enable-background="new 0 0 24 24" height="24px" id="Layer_1" version="1.1" viewBox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path clip-rule="evenodd" d="M20.002,24.001H4.014c-1.104,0-1.998-0.896-1.998-2.001V11.994  c0-1.105,0.895-2.002,1.998-2.002h0.999V6.991c0-3.868,3.132-7.004,6.995-7.004s6.995,3.136,6.995,7.004v3.001h0.999  c1.104,0,1.998,0.896,1.998,2.002V22C22,23.104,21.105,24.001,20.002,24.001z M16.005,6.991c0-2.21-1.79-4.002-3.997-4.002  S8.011,4.781,8.011,6.991v3.001h7.994V6.991z" fill-rule="evenodd"/></svg></span>
+                                    <!-- <span class="input-group-addon login_icon" id="correct" ng-hide="true"><img src="assets/images/correct.png"></span>
+                                    <span class="input-group-addon login_icon" id="incorrect" ng-hide="true"><img src="assets/images/incorrect.png"></span> -->
+                                    <input class="form-control inp-passwd" type="password" ng-model="login.credentials.Password" placeholder="Password"  aria-describedby="basic-addon2" />
+                                    
+                                </div>
+                            </div>
+                          <!--     <div>                                
+                                <div class="view-form-icon" ng-show="showEmailHelp">
+                                    <div class="input-group">
+                                        <label ng-show="credentials.Email">Email</label>
+                                        <span class="input-group-addon login_icon" id="basic-addon3"><img src="assets/images/forgot.png"></span>
+                                        <input class="form-control" type="email" ng-model="credentials.Email" placeholder="{{'Email' | r}}" aria-describedby="basic-addon3" />
+                                    </div>
+                                </div>
+                            </div>
+                          <div>
+                                <div class="view-form-icon" ng-show="false">
+                                    <h2 class="animated fadeIn text-center">Reset your password?</h2>
+                                    <div class="input-group">
+                                        <label ng-show="credentials.NewPassword">New Password</label>
+                                        <span class="input-group-addon login_icon" id="basic-addon4"><img src="assets/images/password_img.png"></span>
+                                        <input class="form-control" name="new_password" type="password" ng-model="credentials.NewPassword" placeholder="New Password" aria-describedby="basic-addon4" />
+                                    </div>
+                                    <div class="input-group">
+                                        <label ng-show="credentials.ConfirmPassword">Confirm Password</label>
+                                        <span class="input-group-addon login_icon" id="basic-addon5">*</span>
+                                        <input class="form-control" name="confirm_password" type="password" ng-model="credentials.ConfirmPassword"  placeholder="Confirm Password" ng-match="credentials.NewPassword" aria-describedby="basic-addon5" />
+                                        <i class="fa fa-lock"></i>
+                                        <inlineerror ng-show="login_form.confirm_password.$error.match" title="Password do not match!" />
+                                    </div>
+                                </div>
+                            </div> -->
+                            <input ng-disabled="login_form.$invalid" class="btn btn-large btn-primary btn-block login_btn" id="451_btn_login" type="submit" value="LOGIN" />
+                        </div>
+                        <!-- <a href="#" ng-show="!showEmailHelp && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Submit'">Forgot Password?</a> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
