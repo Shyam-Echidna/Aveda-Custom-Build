@@ -51,7 +51,7 @@ function BaseController( $state, UserFactory,BaseFact) {
 	vm.isCollapsed = true;
 	vm.subClaimsisCollapsed = true;
 
-	vm.user = JSON.parse(UserFactory.get());
+	vm.user = UserFactory.get();
 	vm.searchTypes = [
 		"Products",
 		"Salons"

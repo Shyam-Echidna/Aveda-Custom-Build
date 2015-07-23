@@ -9,7 +9,8 @@ angular.module( 'orderCloud', [
 	'orderCloud.base',
 	'orderCloud.dashboard',
     'orderCloud.browse',
-	'Login'
+	'Login',
+    'orderCloud.profile'
 ])
 
 	.config( Routing )
@@ -17,6 +18,7 @@ angular.module( 'orderCloud', [
 	.controller( 'AppCtrl', AppCtrl )
 	.factory('Auth', AuthFactory)
 	.factory('Request', RequestFactory)
+    .factory('UserFactory', UserFactory)
 	.constant('ocscope', 'FullAccess')
 	.constant('appname', 'Aveda')
 	
@@ -163,3 +165,38 @@ function RequestFactory($q, $rootScope, Auth) {
 }
 RequestFactory.$inject = ["$q", "$rootScope", "Auth"];
 
+
+function UserFactory($http, $q, apiurl, $cookieStore, appname){
+    return {
+        get : _getUser,
+        set : _setUser,
+        remove : _remove
+    };
+
+    function _setUser(){
+        var defferred = $q.defer();
+        //return $resource(authurl, {}, { login: { method: 'POST'}}).login(data).$promise;
+        $http({
+
+                method: 'GET',
+                url: apiurl + '/me',
+                data: [],
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+
+            }).success(function (data, status, headers, config) {
+                defferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defferred.reject(data);
+            });
+            return defferred.promise;
+    }
+     function _getUser(){
+        return JSON.parse($cookieStore.get(appname + '.User')) || false;
+     }
+     function _remove(){
+        $cookieStore.remove(appname + '.User')
+     }
+}
+//UserFactory.$inject = ["$http", "$q", "apiurl", "$cookieStore", "appname"];

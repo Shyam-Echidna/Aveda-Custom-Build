@@ -3,7 +3,6 @@ angular.module( 'Login', [] )
 	.config( LoginConfig )
 	.controller( 'LoginCtrl', LoginController )
 	.factory('LoginFact', LoginFact )
-	.factory('UserFactory', UserFactory)
 
 ;
 
@@ -76,38 +75,4 @@ function LoginFact($http, authurl, clientid, ocscope, $q, UserFactory){
 	function _delete() {
 		Auth.RemoveToken();
 	}
-}
-
-function UserFactory($http, $q, apiurl, $cookieStore, appname){
-	return {
-		get : _getUser,
-		set : _setUser,
-		remove : _remove
-	};
-
-	function _setUser(){
-		var defferred = $q.defer();
-		//return $resource(authurl, {}, { login: { method: 'POST'}}).login(data).$promise;
-		$http({
-
-                method: 'GET',
-                url: apiurl + '/me',
-                data: [],
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-
-            }).success(function (data, status, headers, config) {
-            	defferred.resolve(data);
-            }).error(function (data, status, headers, config) {
-        		defferred.reject(data);
-            });
-            return defferred.promise;
-	}
-	 function _getUser(){
-	 	return $cookieStore.get(appname + '.User') || false;
-	 }
-	 function _remove(){
-	 	$cookieStore.remove(appname + '.User')
-	 }
 }
