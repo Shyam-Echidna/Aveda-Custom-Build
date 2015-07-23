@@ -382,8 +382,8 @@ ul.dropdown-menu.browse_submenu.win-ht.mb_disp {
   position: absolute;
 }
 ul.dropdown-menu-right.col-lg-3.col-md-3.col-sm-3.sub_browse_menu-2.win-ht.mb_disp.ng-scope {
-  position: relative;
-  top: -59px;
+  position: absolute;
+  top: 0;
   left: 226px;
 }
 ul.dropdown-menu-right.win-ht.sub_browse_menu-3.ng-scope {
@@ -396,13 +396,17 @@ ul.dropdown-menu-right.win-ht.sub_browse_menu-3.ng-scope {
 .dpdwnTwo,dpdwnThree{
   display:none;
 }
-.dpdwnliOne:hover > .dpdwnTwo {
+.dpdwnliOne:hover  .dpdwnTwo {
   display:block;
 }
 
-.dpdwnliOne:hover > .dpdwnTwo .dpdwnThree{
-  display:none ;
+li ul.dpdwnThree{
+  display:none;
+    position: absolute  !important;
+  min-width: 210px;
+  top: 0  !important;
 }
-.dpdwnliTwo :hover > .dpdwnThree {
+
+.dpdwnliTwo:hover  .dpdwnThree {
   display:block !important;
 }

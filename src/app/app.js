@@ -8,6 +8,7 @@ angular.module( 'orderCloud', [
 	'ui.router',
 	'orderCloud.base',
 	'orderCloud.dashboard',
+    'orderCloud.myusers',
     'orderCloud.browse',
 	'Login',
     'orderCloud.profile'

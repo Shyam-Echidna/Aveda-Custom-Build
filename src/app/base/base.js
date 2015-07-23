@@ -57,14 +57,9 @@ function BaseController( $state, UserFactory,BaseFact) {
 		"Salons"
 	];
 	 BaseFact.getAll().then(function (items) {
-		console.log(items);
 		vm.cats = unflatten(items.Items);
-		console.log(vm.cats);
 	});
-	//console.log(vm.cats);
-	vm.mouseOverThing = function(){
-		alert(100);
-	}
+	
 	vm.setSearchType = function(type) {
 		vm.searchType = type;
 	};
