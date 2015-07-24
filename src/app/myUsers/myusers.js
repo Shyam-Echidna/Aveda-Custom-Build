@@ -12,17 +12,20 @@ function MyusersConfig( $stateProvider ) {
 		templateUrl:'myUsers/templates/myusers.tpl.html',
 		controller:'MyusersCtrl',
 		controllerAs: 'myusers',
-		data:{ pageTitle: 'Myusers' }
+		data:{ pageTitle: 'Myusers' },
+        resolve:{
+            myUsersDetails : function(MyusersFact){
+             return MyusersFact.getUsers();
+            }
+        }
 	});
 }
 
-function MyusersController(MyusersFact) {
+function MyusersController(myUsersDetails) {
 
 	var vm = this;
-	MyusersFact.getUsers().then(function (items) {
-		console.log(items);
-        vm.myusers = items.Items;
-});
+    vm.myusers = myUsersDetails.Items;
+	
 }
 
 function MyusersFactory($http,$q){

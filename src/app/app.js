@@ -9,6 +9,7 @@ angular.module( 'orderCloud', [
 	'orderCloud.base',
 	'orderCloud.dashboard',
     'orderCloud.myusers',
+     'orderCloud.news',
     'orderCloud.browse',
 	'Login',
     'orderCloud.profile'
