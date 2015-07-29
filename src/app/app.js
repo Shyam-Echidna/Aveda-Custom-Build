@@ -12,7 +12,8 @@ angular.module( 'orderCloud', [
      'orderCloud.news',
     'orderCloud.browse',
 	'Login',
-    'orderCloud.profile'
+    'orderCloud.profile',
+    'orderCloud.promotions'
 ])
 
 	.config( Routing )
