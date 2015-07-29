@@ -1,21 +1,14 @@
-<aside class="aveda-browse">
-	<ul>
-		<li ng-repeat="category in browse.categories" ng-click="browse.showSubs(category)">
-			{{category.Name}}
-			<div class="aveda-sub-browse" ng-if="category.Subs" ng-show="category.ShowSubs">
-				<ul>
-					<li ng-repeat="subcat01 in category.Subs" ng-click="browse.showSubs(subcat01)">
-						{{subcat01.Name}}
-						<div class="aveda-sub-browse" ng-if="subcat01.Subs" ng-show="subcat01.ShowSubs">
-							<ul>
-								<li ng-repeat="subcat02 in subcat01.Subs">
-									{{subcat02.Name}}
-								</li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</li>
-	</ul>
-</aside>
+
+<ul class="dropdown-menu browse_submenu win-ht mb_disp" role="menu">
+                         <li role="presentation" class="active dpdwnliOne" ng-repeat=" cat in base.cats">
+                                    <a href="#" ui-sref="base.detail({id: cat.ID})" catId = "{{cat.ID}}" >{{cat.Name}}<span ng-if="cat.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
+                                    <ul ng-if="cat.children.length" class="dropdown-menu-right col-lg-3 col-md-3 col-sm-3 sub_browse_menu-2 win-ht mb_disp dpdwnTwo">
+                                         <li ng-repeat="sub in cat.children" class="dpdwnliTwo">
+                                        <a href="#" catId = "{{sub.ID}}">{{sub.Name}}<span ng-if="sub.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
+                                        <ul ng-if="sub.children.length" class="dropdown-menu-right win-ht sub_browse_menu-3 dpdwnThree" >
+                                            <li ng-repeat=" subCat in sub.children"><a href="#" catId = "{{subCat.ID}}">{{subCat.Name}}</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                            </li>                                
+                        </ul> 

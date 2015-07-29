@@ -119,33 +119,4 @@ function BaseFactory($http,$q){
         };
 }
 
-    function unflatten(arr) {
-       
-      var tree = [],
-          mappedArr = {},
-          arrElem,
-          mappedElem;
-
-      // First map the nodes of the array to an object -> create a hash table.
-      for(var i = 0, len = arr.length; i < len; i++) {
-        arrElem = arr[i];
-        mappedArr[arrElem.ID] = arrElem;
-        mappedArr[arrElem.ID]['children'] = [];
-      }
-
-
-      for (var ID in mappedArr) {
-        if (mappedArr.hasOwnProperty(ID)) {
-          mappedElem = mappedArr[ID];
-          // If the element is not at the root level, add it to its parent array of children.
-          if (mappedElem.ParentID) {
-            mappedArr[mappedElem['ParentID']]['children'].push(mappedElem);
-          }
-          // If the element is at the root level, add it to first level elements array.
-          else {
-            tree.push(mappedElem);
-          }
-        }
-      }
-      return tree;
-    }
+   

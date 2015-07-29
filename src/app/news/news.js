@@ -57,7 +57,6 @@ function NewsListController( newsDetails ) {
 	var vm = this;
 	vm.articles = [];
 	angular.forEach(newsDetails.Items, function(f) {
-				console.log(JSON.parse(f.DefaultValue));
 				f.Article = JSON.parse(f.DefaultValue);
 					vm.articles.push(f);
 

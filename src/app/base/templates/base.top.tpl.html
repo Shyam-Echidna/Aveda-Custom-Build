@@ -73,7 +73,7 @@
                 <ul class="nav navigation_div">
 
                     <li role="presentation" class="col-lg-2  col-md-2 col-sm-2 col-xs-2 browse_div">
-                        <a href="#" class="dropdown-toggle close-eff" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" ui-sref="base.browse" class="dropdown-toggle close-eff" data-toggle="dropdown" role="button" aria-expanded="false">
 <!--
                             <span class="sand_icon">
                                 <i class="fa fa-bars" ng-class="{ 'text-info': navStatus.visible }"></i>
@@ -82,14 +82,9 @@
 							<span class="a_lines"></span>
                             <span class="text-primary browse_text mb_disp">BROWSE</span>
                         </a>
-                       <!--  <ul class="dropdown-menu browse_submenu win-ht mb_disp" role="menu">
-
-                        <li role="presentation" class="active" ng-repeat=" cat in base.cats">
-                                    <a href="#">{{cat.Name}}<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                        <ul> -->
-
-                      <ul class="dropdown-menu browse_submenu win-ht mb_disp" role="menu">
+                     
+                        <aveda-browse></aveda-browse>
+                    <!--   <ul class="dropdown-menu browse_submenu win-ht mb_disp" role="menu">
                          <li role="presentation" class="active dpdwnliOne" ng-repeat=" cat in base.cats">
                                     <a href="#" >{{cat.Name}}<span ng-if="cat.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
                                     <ul ng-if="cat.children.length" class="dropdown-menu-right col-lg-3 col-md-3 col-sm-3 sub_browse_menu-2 win-ht mb_disp dpdwnTwo">
@@ -100,217 +95,8 @@
                                             </ul>
                                         </li>
                                     </ul>
-                            </li>
-
-                            <!--
-                            <li role="presentation" class="active">
-                                <a href="#">HAIR CARE<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                <ul class="dropdown-menu-right col-lg-2 col-md-2 col-sm-2 sub_browse_menu-2 win-ht mb_disp">
-                                    <li>
-                                        <a href="#">Shampoo<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conditioner<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Treatment</a></li>
-                                    <li><a href="#">Styling</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li>
-                                        <a href="#">Hair Color<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Collections</a></li>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="active">
-                                <a href="#">STYLING<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                <ul class="dropdown-menu-right col-lg-2 col-md-2 col-sm-2 sub_browse_menu-2 win-ht">
-                                    <li>
-                                        <a href="#">Shampoo<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conditioner<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Treatment</a></li>
-                                    <li><a href="#">Styling</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li>
-                                        <a href="#">Hair Color<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Collections</a></li>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">SKINCARE<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                    <ul class="dropdown-menu-right col-lg-2 col-md-2 col-sm-2 sub_browse_menu-2 win-ht">
-                                    <li>
-                                        <a href="#">Shampoo<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Conditioner<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Treatment</a></li>
-                                    <li><a href="#">Styling</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li>
-                                        <a href="#">Hair Color<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                                        <ul class="dropdown-menu-right win-ht sub_browse_menu-3">
-                                            <li><a href="#">invati<sup>TM</sup></a></li>
-                                            <li><a href="#">dry remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">litres</a></li>
-                                            <li><a href="#">rosemary mint</a></li>
-                                            <li><a href="#">shampure<sup>TM</sup></a></li>
-                                            <li><a href="#">smooth infusion<sup>TM</sup></a></li>
-                                            <li><a href="#">be curly<sup>TM</sup></a></li>
-                                            <li><a href="#">damage remedy<sup>TM</sup></a></li>
-                                            <li><a href="#">color conserve<sup>TM</sup></a></li>
-                                            <li><a href="#">pure adundance<sup>TM</sup></a></li>
-                                            <li><a href="#">suncare</a></li>
-                                            <li><a href="#">brilliant<sup>TM</sup></a></li>
-                                            <li><a href="#">scalp benefits<sup>TM</sup></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Collections</a></li>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">BODY<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">MEN<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">MAKE-UP<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">PERFUME<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">GIFTS<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>
-                            <li role="presentation" class="active">
-                                    <a href="#">NEW<span class="glyphicon glyphicon-chevron-right pull-right" aria-hidden="true"></span></a>
-                            </li>-->
-                        </ul>
+                            </li>                                
+                        </ul> -->
                     </li>
                     <li class="col-lg-6 col-md-6 col-sm-6 col-xs-2 search_div">
                         <form role="form" class="input-group">

@@ -2,7 +2,8 @@ angular.module( 'orderCloud.myusers', [] )
 
 	.config( MyusersConfig )
 	.controller( 'MyusersCtrl', MyusersController )
-	.factory('MyusersFact',MyusersFactory)
+    .factory('MyusersFact',MyusersFactory)
+	.factory('myCache',myCache)
 
 ;
 
@@ -20,29 +21,45 @@ function MyusersConfig( $stateProvider ) {
         }
 	});
 }
+function myCache($cacheFactory)  {
 
-function MyusersController(myUsersDetails) {
-
+     return $cacheFactory('myData');
+}
+function MyusersController(myUsersDetails, $cacheFactory) {
+console.log("myUsersDetails",myUsersDetails);
 	var vm = this;
     vm.myusers = myUsersDetails.Items;
-	
+	/*var myCache = $cacheFactory.get('$http');
+    console.log("myCache===",myCache);
+    console.log("myCache===",myCache.get("https://testapi.ordercloud.io/v1/buyers/1/users"));
+    console.log("myCache===",myCache.get("https://testapi.ordercloud.io/v1/buyers/2/categories/productassignments?categoryID=_pgtwwnsRky5X3zwuKwqRw"));*/
 }
 
-function MyusersFactory($http,$q){
+function MyusersFactory($http,$q,$cacheFactory, myCache){
 
         return {
           
             getUsers: function() {
-                var deferred = $q.defer();
-                $http({ method: "GET", 
-                	url: "https://testapi.ordercloud.io/v1/buyers/1/users" })
+                var cache = myCache.get('myData');
+                   if (cache) {
+                    console.log('if');
+                    return cache;
+                   }
+                   else{
+                    console.log('else');
+                var deferred = $q.defer();              
+                $http({ method: "GET",                    
+                	url: "https://testapi.ordercloud.io/v1/buyers/1/users", 
+                    cache: true
+                })
                     .success(function (data, status, headers, config) {
-                    	
+                    	 myCache.put('myData', data);
                         deferred.resolve(data);
                     }).error(function (data, status, headers, config) {
                         deferred.reject(data);
                     });
                 return deferred.promise;
+            }
             }
         };
 }
