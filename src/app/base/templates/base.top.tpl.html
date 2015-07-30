@@ -98,6 +98,12 @@
                             </li>                                
                         </ul> -->
                     </li>
+                    <script type="text/ng-template" id="customTemplate.html">
+                      <a>
+                          <img ng-src="{{match.model.xp.images[0]}}" width="16">
+                          <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+                      </a>
+                    </script>
                     <li class="col-lg-6 col-md-6 col-sm-6 col-xs-2 search_div">
                         <form role="form" class="input-group">
                             <div class="form-group input-group-btn">
@@ -105,8 +111,8 @@
                                 <option value="default">PRODUCT TYPE</option>
                                 <option value="salon">Salon</option>
                                 <option value="products">Products</option>
-                              </select>
-                              <input type="text" class="form-control search_field mb_disp mb_search" ng-keypress="search_func(searchkeyword)" ng-model="searchkeyword" aria-label="..." placeholder="SEARCH...">
+                              </select> fdgg{{base.productsList}}
+                              <input type="text" class="form-control search_field mb_disp mb_search"  ng-model="searchkeyword"   typeahead="product as product.Name for product in base.productsList | filter:{Name:$viewValue}" typeahead-template-url="customTemplate.html" aria-label="..." placeholder="SEARCH...">
                               <!-- <span class="input-group-btn"> -->
                                 <button class="btn btn-default search-btn" type="button" > <!-- <span class="glyphicon glyphicon-search" aria-hidden="true"></span> -->
                                 <img src="assets/images/search-logo.png" class="search" alt="Search">

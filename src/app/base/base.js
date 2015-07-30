@@ -56,8 +56,13 @@ function BaseController( $state, UserFactory,BaseFact) {
 		"Products",
 		"Salons"
 	];
-	 BaseFact.getAll().then(function (items) {
+	 BaseFact.getAllCategories().then(function (items) {
 		vm.cats = unflatten(items.Items);
+	});
+	 BaseFact.getAllProducts().then(function (Products) {
+		console.log(Products);
+		vm.productsList = Products;
+		console.log(vm.productsList);
 	});
 	
 	vm.setSearchType = function(type) {
@@ -101,10 +106,13 @@ function BaseController( $state, UserFactory,BaseFact) {
 }
 
 function BaseFactory($http,$q){
-
-        return {
+	var service = {
+		getAllCategories:_getAllCategories,
+		getAllProducts :_getAllProducts
+	}
+     
           
-            getAll: function() {
+            function _getAllCategories() {
                 var deferred = $q.defer();
                 $http({ method: "GET", 
                 	url: "https://testapi.ordercloud.io/v1/buyers/2/categories" })
@@ -116,7 +124,19 @@ function BaseFactory($http,$q){
                     });
                 return deferred.promise;
             }
-        };
+           function _getAllProducts() {
+                var deferred = $q.defer();
+                $http({ method: "GET", 
+                	url: "https://testapi.ordercloud.io/v1/Products" })
+                    .success(function (data, status, headers, config) {
+                    	
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(data);
+                    });
+                return deferred.promise;
+            }
+   return service;
 }
 
    
