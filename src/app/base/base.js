@@ -61,7 +61,7 @@ function BaseController( $state, UserFactory,BaseFact) {
 	});
 	 BaseFact.getAllProducts().then(function (Products) {
 		console.log(Products);
-		vm.productsList = Products;
+		vm.productsList = Products.Items;
 		console.log(vm.productsList);
 	});
 	
