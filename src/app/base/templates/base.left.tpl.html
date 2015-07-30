@@ -1,6 +1,6 @@
 <nav am-layout="vertical aveda-left-nav">
 	<a href="#"><img src="assets/images/aveda_logo_white.png" alt="Aveda"></a>
-	<a ui-sref-active="active" ui-sref="base.news"><i class="fa fa-newspaper-o" ng-show="base.hasPermission('news')"></i> News <recent-news></recent-news></a>
+	<a ui-sref-active="active" ui-sref="base.news" ng-show="base.hasPermission('news')"><i class="fa fa-newspaper-o"></i> News <recent-news></recent-news></a>
 	<a ui-sref-active="active" ui-sref="base.promotions" ng-show="base.hasPermission('promotions')"><i class="fa fa-bullhorn"></i> Promotions</a>
 	<a ui-sref-active="active" ui-sref="base.profile" ng-show="base.hasPermission('profile')"><i class="fa fa-cog"></i> My Profile</a>
 	<!-- <div class="left-nav-dropdown" role="dropdown" auto-close="disabled" dropdown>
@@ -61,7 +61,7 @@
       			<a href="" class="order">Order Claim</a>
       			<a href="" class="order">Non-Order Claim</a>
     		</div>
-	<a ui-sref-active="active"><i class="fa fa-thumbs-down" ng-show="base.hasPermission('client')"></i> Client Dislike</a>
+	<a ui-sref-active="active" ng-show="base.hasPermission('client')"><i class="fa fa-thumbs-down"></i> Client Dislike</a>
 	<a ui-sref-active="active" ng-if="application.$ocMedia('orientation:portrait')"><i class="fa fa-eye"></i> Browse</a>
 </nav>
 <!-- <p class="am-text-c"><small>Copyright &#169; 2015, Aveda</small></p> -->

@@ -62,6 +62,7 @@ function BaseController( $state, UserFactory,BaseFact,permissions) {
 		"Salons"
 	];
 	vm.hasPermission = function(perm){
+		console.log(perm, permissions.indexOf(perm));
 		return (permissions.indexOf(perm) >= 0);
 	};
 	 BaseFact.getAll().then(function (items) {

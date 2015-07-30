@@ -221,7 +221,7 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname){
      function _getPermissions(){
         //console.log(permissions);
        // console.log(permissions['CSR']);
-       return permissions[_getUserType()];
+       return permissions[_getUserType()] || [];
      }
 }
 //UserFactory.$inject = ["$http", "$q", "apiurl", "$cookieStore", "appname"];
