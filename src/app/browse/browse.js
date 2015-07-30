@@ -87,6 +87,7 @@ function newcontrlController($stateParams, BrowseFact, lodash, $modal){
     var modalInstance = $modal.open({
       animation: true,
       templateUrl: 'browse/templates/quickView.tpl.html',
+      size : 'lg',
       controller: function($modalInstance, productData){
       	var vm = this;
       	vm.productInfo = productData;
