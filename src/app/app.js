@@ -11,7 +11,7 @@ angular.module( 'orderCloud', [
 	'orderCloud.base',
 	'orderCloud.dashboard',
     'orderCloud.myusers',
-    'orderCloud.news',
+     'orderCloud.news',
     'orderCloud.browse',
 	'Login',
     'orderCloud.profile',
@@ -32,8 +32,7 @@ angular.module( 'orderCloud', [
 	// Test
 	 .constant('authurl', 'https://testauth.ordercloud.io/oauth/token')
 	 .constant('apiurl', 'https://testapi.ordercloud.io/v1')
-     //.constant('clientid', '018ddfbd-aff8-413a-8518-f45fc774619b')   
-	 .constant('clientid', '9ccce69a-e612-4856-bf54-d3d8924f02d6')	 
+	 .constant('clientid', '018ddfbd-aff8-413a-8518-f45fc774619b')	 
 	 .config(Interceptor)
 ;
 
@@ -175,21 +174,12 @@ RequestFactory.$inject = ["$q", "$rootScope", "Auth"];
 
 
 function UserFactory($http, $q, apiurl, $cookieStore, appname){
-
-    var permissions = {
-        "CSR" : ["news","promotions","claims","client","profile"],
-        "SDP" : ["news","promotions","claims","client","profile","salones","orders"],
-        "SAD" : ["news","promotions","claims","client","profile","salones","orders","users"],
-        "SAU" : ["news","promotions","profile","orders"]
-    };
-
     return {
         get : _getUser,
         set : _setUser,
-        remove : _remove,
-        getUserType : _getUserType,
-        getPermissions : _getPermissions
+        remove : _remove
     };
+
     function _setUser(){
         var defferred = $q.defer();
         //return $resource(authurl, {}, { login: { method: 'POST'}}).login(data).$promise;
@@ -214,14 +204,6 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname){
      }
      function _remove(){
         $cookieStore.remove(appname + '.User')
-     }
-     function _getUserType(){
-       return _getUser()['ID'].split('_')[0];
-     }
-     function _getPermissions(){
-        //console.log(permissions);
-       // console.log(permissions['CSR']);
-       return permissions[_getUserType()];
      }
 }
 //UserFactory.$inject = ["$http", "$q", "apiurl", "$cookieStore", "appname"];

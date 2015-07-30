@@ -17,10 +17,6 @@ function BaseConfig( $stateProvider ) {
 						$state.go( 'login' );
 					}
 				);
-			},
-			permissions : function(UserFactory){
-				console.log(UserFactory.getPermissions());
-				return UserFactory.getPermissions();
 			}
 		},
 		views: {
@@ -45,11 +41,10 @@ function BaseConfig( $stateProvider ) {
 	});
 }
 
-function BaseController( $state, UserFactory,BaseFact,permissions) {
+function BaseController( $state, UserFactory,BaseFact) {
 	//BaseFact.GetMe();
 	
 	var vm = this;
-	//vm.permissions = permissions;
 	vm.swiped = 'none';
 	vm.showMobileSearch = false;
 	vm.searchType = 'Products';
@@ -61,9 +56,6 @@ function BaseController( $state, UserFactory,BaseFact,permissions) {
 		"Products",
 		"Salons"
 	];
-	vm.hasPermission = function(perm){
-		return (permissions.indexOf(perm) >= 0);
-	};
 	 BaseFact.getAll().then(function (items) {
 		vm.cats = unflatten(items.Items);
 	});
