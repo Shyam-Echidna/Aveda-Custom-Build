@@ -66,18 +66,19 @@ module.exports = {
   vendor_files: {
     js: [
       'vendor/angular/angular.js',
+      'vendor/angular-bootstrap/ui-bootstrap.js',
+      'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
       'vendor/angular-sanitize/angular-sanitize.js',
       'vendor/angular-messages/angular-messages.js',
       'vendor/angular-cookies/angular-cookies.js',
       'vendor/angular-animate/angular-animate.js',
       'vendor/angular-touch/angular-touch.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
+      'vendor/ng-lodash/build/ng-lodash.js',
       'vendor/jquery/dist/jquery.js',
       'vendor/bootstrap/dist/js/bootstrap.min.js'  
     ],
     css: [
-    'vendor/bootstrap/dist/css/bootstrap-theme.css',
-    'vendor/bootstrap/dist/css/bootstrap.min.css'
     ],
     assets: [
     ]

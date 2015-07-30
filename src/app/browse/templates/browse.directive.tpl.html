@@ -4,7 +4,7 @@
                                     <a href="#" ui-sref="base.detail({id: cat.ID})" catId = "{{cat.ID}}" >{{cat.Name}}<span ng-if="cat.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
                                     <ul ng-if="cat.children.length" class="dropdown-menu-right col-lg-3 col-md-3 col-sm-3 sub_browse_menu-2 win-ht mb_disp dpdwnTwo">
                                          <li ng-repeat="sub in cat.children" class="dpdwnliTwo">
-                                        <a href="#" catId = "{{sub.ID}}">{{sub.Name}}<span ng-if="sub.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
+                                        <a href="#" ui-sref="base.detail({id: sub.ID})" catId = "{{sub.ID}}">{{sub.Name}}<span ng-if="sub.children.length"  class="fa  fa-chevron-right pull-right" aria-hidden="true"></span></a>
                                         <ul ng-if="sub.children.length" class="dropdown-menu-right win-ht sub_browse_menu-3 dpdwnThree" >
                                             <li ng-repeat=" subCat in sub.children"><a href="#" catId = "{{subCat.ID}}">{{subCat.Name}}</a></li>
                                             </ul>

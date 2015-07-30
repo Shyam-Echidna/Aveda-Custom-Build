@@ -1,0 +1,17 @@
+<article >
+
+<div class="margin-left main-cat-item" ng-if="newbrowse.catDetails">
+	<img src="assets\images\category\Hair Care.jpg">
+	<div ng-bind="newbrowse.catDetails.Name" class="catName"></div>
+	<div ng-bind="newbrowse.catDetails.Description" class="catDesc"></div>
+</div>
+
+<a class="sub-cat-item margin-left" ui-sref="base.productList({id: item.ID})" ng-repeat="item in newbrowse.catDetails.children" >
+	<div >
+		<img src="assets\images\category\catie.jpg">
+		<div ng-bind="item.Name" class="catName"></div>
+		<div ng-bind="item.Description" class="catDesc"></div>
+	</div>
+</a>
+	
+</article>

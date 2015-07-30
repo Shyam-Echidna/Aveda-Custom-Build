@@ -1,1 +1,26 @@
-<h1>products</h1>{{base.catDetails}} {{newbrowse.catDetails}}
+<!-- <h1>products</h1>{{base.catDetails}} {{newbrowse.catDetails}} -->
+
+<article >
+<a class="sub-cat-item margin-left"  ng-repeat="item in newbrowse.products" >
+	<div >
+		<img ng-src="{{item.data.xp.images[0]}}">
+		<div ng-bind="item.data.Name" class="catName"></div>
+		<div ng-bind="item.data.Description" class="catDesc"></div>
+		<button ng-click="newbrowse.open(item.data.ID)">Quick View</button>
+	</div>
+</a>
+</article>
+
+<!-- <modal title="Login dfgf" visible="newbrowse.showModal">
+    <form role="form">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" />
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </modal> -->

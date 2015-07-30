@@ -18,6 +18,23 @@ function BrowseConfig( $stateProvider ) {
 		.state( 'base.detail', {
 			url: '/detail/:id',
 			data:{ pageTitle: 'Administer browse' },
+			templateUrl:'browse/templates/categoryListing.tpl.html',
+			controller:'newcontrl',
+			controllerAs:'newbrowse'
+			/*resolve: {
+				NewsItem: function( $state, $stateParams, BrowseFact ) {
+					console.log($stateParams);
+					return BrowseFact.List($stateParams.id)
+						.then(function(article) {
+							return article;
+						})
+						
+				}
+			}*/
+		})
+		.state( 'base.productList', {
+			url: '/productList/:id',
+			data:{ pageTitle: 'Administer browse' },
 			templateUrl:'browse/templates/productListing.tpl.html',
 			controller:'newcontrl',
 			controllerAs:'newbrowse'
@@ -44,7 +61,7 @@ function avedaBrowseDirective() {
 	};
 	return obj;
 }
-function newcontrlController($stateParams, BrowseFact){
+function newcontrlController($stateParams, BrowseFact, lodash, $modal){
 	var vm = this;
 	console.log($stateParams);
 	BrowseFact.getAll().then(function (items) {
@@ -56,11 +73,50 @@ function newcontrlController($stateParams, BrowseFact){
 				break;
 			}
 		}
+		//vm.catDetails = searchTree(categories,$stateParams.id);
+		//console.log(vm.catDetails);
+		console.log(categories, lodash.pluck(lodash.where( categories , {'ID':$stateParams.id})));
 	});
 	BrowseFact.List($stateParams.id).then(function(items){
 		console.log("items===",items);
 		vm.products = items;
-	})
+	});
+
+	vm.open = function (id) {
+		console.log(id);
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: 'browse/templates/quickView.tpl.html',
+      controller: function($modalInstance, productData){
+      	var vm = this;
+      	vm.productInfo = productData;
+      	vm.close = function(){$modalInstance.dismiss('cancel');};
+      },
+      controllerAs : "productInf",
+      resolve: {
+        productData: function (BrowseFact) {
+          return BrowseFact.getProd(id).then(
+          function(success){
+          	return success;
+          },
+          function(error){
+          	return false;
+          })
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+	// vm.showModal = false;
+ //    vm.toggleModal = function(id){
+ //    	alert(id);
+ //        vm.showModal = !vm.showModal;
+ //    };
 
 }
 function avedaBrowseController(BrowseFact, $rootScope) {
@@ -92,7 +148,8 @@ function(event, toState, toParams, fromState, fromParams){
 function BrowseFactory($http,$q){
 var service = {
 		getAll: _get,
-		List: _list
+		List: _list,
+		getProd : _getProduct
 	};
       
           
@@ -138,6 +195,36 @@ var service = {
                 return deferred.promise;
 
 			}
+
+			function _getProduct(productID){
+				var deferred = $q.defer();
+				$http({ method: "GET", 
+                	url: "https://testapi.ordercloud.io/v1/products/"+productID,
+                	cache: true })
+                    .success(function (data, status, headers, config) {
+      //               	prodArr = [];
+      //               	for(var i=0;i<data.Items.length;i++){
+      //               		prodArr.push(data.Items[i].ProductID);
+      //               	}
+      //               		ajaxarr = [];
+						// 	for(var i=0;i<prodArr.length;i++)
+						// {
+						// 	var promise = $http({ method: "GET", 
+      //           			url: "https://testapi.ordercloud.io/v1/products/"+prodArr[i] });
+						// 	ajaxarr.push(promise);
+						// }
+                    	
+                    	
+      //               	$q.all(ajaxarr).then(function(items){						
+						// deferred.resolve(items);
+						// });
+                   	 deferred.resolve(data)
+                        
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(data);
+                    });
+				return deferred.promise;
+			}
            return service;
        
 }
@@ -172,3 +259,4 @@ var service = {
       }
       return tree;
     }
+
