@@ -62,13 +62,17 @@ function BaseController( $state, UserFactory,BaseFact,permissions) {
 		"Salons"
 	];
 	vm.hasPermission = function(perm){
-		console.log(perm, permissions.indexOf(perm));
+		//console.log(perm, permissions.indexOf(perm));
 		return (permissions.indexOf(perm) >= 0);
 	};
-	 BaseFact.getAll().then(function (items) {
+	 BaseFact.getAllCategories().then(function (items) {
 		vm.cats = unflatten(items.Items);
 	});
 	
+	BaseFact.getAllProducts().then(function (Products) {
+	console.log(Products);
+	vm.productsList = Products.Items;
+	});
 	vm.setSearchType = function(type) {
 		vm.searchType = type;
 	};
@@ -109,23 +113,38 @@ function BaseController( $state, UserFactory,BaseFact,permissions) {
 	}
 }
 
+
 function BaseFactory($http,$q){
-
-        return {
-          
-            getAll: function() {
-                var deferred = $q.defer();
-                $http({ method: "GET", 
-                	url: "https://testapi.ordercloud.io/v1/buyers/2/categories" })
-                    .success(function (data, status, headers, config) {
-                    	
-                        deferred.resolve(data);
-                    }).error(function (data, status, headers, config) {
-                        deferred.reject(data);
-                    });
-                return deferred.promise;
-            }
-        };
+var service = {
+getAllCategories:_getAllCategories,
+getAllProducts :_getAllProducts
 }
-
+    
+         
+           function _getAllCategories() {
+               var deferred = $q.defer();
+               $http({ method: "GET", 
+               	url: "https://testapi.ordercloud.io/v1/buyers/2/categories" })
+                   .success(function (data, status, headers, config) {
+                   	
+                       deferred.resolve(data);
+                   }).error(function (data, status, headers, config) {
+                       deferred.reject(data);
+                   });
+               return deferred.promise;
+           }
+          function _getAllProducts() {
+               var deferred = $q.defer();
+               $http({ method: "GET", 
+               	url: "https://testapi.ordercloud.io/v1/Products" })
+                   .success(function (data, status, headers, config) {
+                   	
+                       deferred.resolve(data);
+                   }).error(function (data, status, headers, config) {
+                       deferred.reject(data);
+                   });
+               return deferred.promise;
+           }
+  return service;
+}
    
