@@ -69,10 +69,10 @@ function BaseController( $state, UserFactory,BaseFact,permissions) {
 		vm.cats = unflatten(items.Items);
 	});
 	
-	BaseFact.getAllProducts().then(function (Products) {
+	/*BaseFact.getAllProducts().then(function (Products) {
 	console.log(Products);
 	vm.productsList = Products.Items;
-	});
+	});*/
 	vm.setSearchType = function(type) {
 		vm.searchType = type;
 	};

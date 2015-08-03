@@ -3,7 +3,10 @@ angular.module('orderCloud.browse', [])
 	.directive('avedaBrowse', avedaBrowseDirective)
 	.controller('avedaBrowseCtrl', avedaBrowseController)
 	.controller('newcontrl', newcontrlController)
+	.controller('prodDetailcontrl', prodDetailController)
 	.factory('BrowseFact',BrowseFactory)
+
+.directive('stopEvent', function () { return { restrict: 'A', link: function (scope, element, attr) { element.bind('click', function (e) { e.stopPropagation(); }); } }; });
 ;
 function BrowseConfig( $stateProvider ) {
 	$stateProvider
@@ -21,33 +24,23 @@ function BrowseConfig( $stateProvider ) {
 			templateUrl:'browse/templates/categoryListing.tpl.html',
 			controller:'newcontrl',
 			controllerAs:'newbrowse'
-			/*resolve: {
-				NewsItem: function( $state, $stateParams, BrowseFact ) {
-					console.log($stateParams);
-					return BrowseFact.List($stateParams.id)
-						.then(function(article) {
-							return article;
-						})
-						
-				}
-			}*/
+			
 		})
 		.state( 'base.productList', {
 			url: '/productList/:id',
-			data:{ pageTitle: 'Administer browse' },
+			data:{ pageTitle: 'product listing' },
 			templateUrl:'browse/templates/productListing.tpl.html',
 			controller:'newcontrl',
 			controllerAs:'newbrowse'
-			/*resolve: {
-				NewsItem: function( $state, $stateParams, BrowseFact ) {
-					console.log($stateParams);
-					return BrowseFact.List($stateParams.id)
-						.then(function(article) {
-							return article;
-						})
-						
-				}
-			}*/
+			
+		})
+		.state( 'base.productDetail', {
+			url: '/productDetail/:id',
+			data:{ pageTitle: 'product listing' },
+			templateUrl:'browse/templates/productDetail.tpl.html',
+			controller:'prodDetailcontrl',
+			controllerAs:'prodDetail'
+			
 		})
 	;
 }
@@ -61,29 +54,47 @@ function avedaBrowseDirective() {
 	};
 	return obj;
 }
-function newcontrlController($stateParams, BrowseFact, lodash, $modal){
+function prodDetailController($stateParams, BrowseFact){
 	var vm = this;
-	console.log($stateParams);
+	BrowseFact.getProd($stateParams.id).then(function(items){
+          	vm.prodDetails = items;
+          	console.log(vm.prodDetails);
+          })
+
+}
+function newcontrlController($state, $stateParams, BrowseFact, lodash, $modal, $rootScope){
+	var vm = this;
 	BrowseFact.getAll().then(function (items) {
 		categories = unflatten(items.Items);
-		for(var i=0;i<categories.length;i++){
+		vm.catDetails = feachele(categories, $stateParams.id);
+		
+		if(!vm.catDetails.children.length){
+			
+			$state.go('base.productList',{id: $stateParams.id});
+		}
+		/*for(var i=0;i<categories.length;i++){
 			if(categories[i].ID == $stateParams.id){				
 				vm.catDetails = categories[i];
 				console.log(vm.catDetails);
 				break;
 			}
-		}
-		//vm.catDetails = searchTree(categories,$stateParams.id);
-		//console.log(vm.catDetails);
-		console.log(categories, lodash.pluck(lodash.where( categories , {'ID':$stateParams.id})));
+		}*/
 	});
 	BrowseFact.List($stateParams.id).then(function(items){
-		console.log("items===",items);
+		
 		vm.products = items;
 	});
 
-	vm.open = function (id) {
-		console.log(id);
+	vm.open = function (id,$event) {
+		
+		 $event.stopPropagation();
+		 $event.preventDefault();
+		/* $rootScope.$on('$stateChangeStart',
+			function(event, toState, toParams, fromState, fromParams){
+			  event.preventDefault();
+			   console.log(event);
+			})*/
+		
     var modalInstance = $modal.open({
       animation: true,
       templateUrl: 'browse/templates/quickView.tpl.html',
@@ -113,12 +124,7 @@ function newcontrlController($stateParams, BrowseFact, lodash, $modal){
       //$log.info('Modal dismissed at: ' + new Date());
     });
   };
-	// vm.showModal = false;
- //    vm.toggleModal = function(id){
- //    	alert(id);
- //        vm.showModal = !vm.showModal;
- //    };
-
+	
 }
 function avedaBrowseController(BrowseFact, $rootScope) {
 	
@@ -131,26 +137,18 @@ function avedaBrowseController(BrowseFact, $rootScope) {
 	BrowseFact.getAll().then(function (items) {
 		vm.cats = unflatten(items.Items);
 	});
-/*$rootScope.$on('$stateChangeStart',
-function(event, toState, toParams, fromState, fromParams){
-   // event.preventDefault();
-    if(toState.name == "base.browse"){
-    	alert('if');
-    	vm.isOpen =!vm.isOpen;
-    }
-    else{
-    	alert('else');
-    }
-    // transitionTo() promise will be rejected with
-    // a 'transition prevented' error
-})*/
+	BrowseFact.getAllProducts().then(function (Products) {
+	console.log(Products);
+	vm.productsList = Products.Items;
+	});
 	
 }
 function BrowseFactory($http,$q){
 var service = {
 		getAll: _get,
 		List: _list,
-		getProd : _getProduct
+		getProd : _getProduct,
+		getAllProducts :_getAllProducts
 	};
       
           
@@ -203,22 +201,6 @@ var service = {
                 	url: "https://testapi.ordercloud.io/v1/products/"+productID,
                 	cache: true })
                     .success(function (data, status, headers, config) {
-      //               	prodArr = [];
-      //               	for(var i=0;i<data.Items.length;i++){
-      //               		prodArr.push(data.Items[i].ProductID);
-      //               	}
-      //               		ajaxarr = [];
-						// 	for(var i=0;i<prodArr.length;i++)
-						// {
-						// 	var promise = $http({ method: "GET", 
-      //           			url: "https://testapi.ordercloud.io/v1/products/"+prodArr[i] });
-						// 	ajaxarr.push(promise);
-						// }
-                    	
-                    	
-      //               	$q.all(ajaxarr).then(function(items){						
-						// deferred.resolve(items);
-						// });
                    	 deferred.resolve(data)
                         
                     }).error(function (data, status, headers, config) {
@@ -226,6 +208,18 @@ var service = {
                     });
 				return deferred.promise;
 			}
+			 function _getAllProducts() {
+               var deferred = $q.defer();
+               $http({ method: "GET", 
+               	url: "https://testapi.ordercloud.io/v1/Products?search=Lotion" })
+                   .success(function (data, status, headers, config) {
+                   	
+                       deferred.resolve(data);
+                   }).error(function (data, status, headers, config) {
+                       deferred.reject(data);
+                   });
+               return deferred.promise;
+           }
            return service;
        
 }
@@ -260,4 +254,30 @@ var service = {
       }
       return tree;
     }
-
+    function feachele(arr, id){
+    for(var i=0;i<arr.length;i++){
+        if(arr[i].ID == id){
+        return  arr[i];
+           
+        }
+        var childarr = arr[i].children;
+        if(childarr.length){
+            for(var j=0;j<childarr.length;j++){
+                if(childarr[j].ID == id){
+                return  childarr[j];
+                  
+                }
+                var subchildarr = childarr[j].children;
+                if(subchildarr.length){
+                   
+                for(var k=0;k< subchildarr.length;k++){
+                if(subchildarr[k].ID == id){
+                return subchildarr[k];
+                    
+                }
+                }
+                }
+            }
+        }
+    }    
+}
