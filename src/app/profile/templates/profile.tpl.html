@@ -1,26 +1,66 @@
 <article class="profile-box">
-	<div class="row">
-	 	<div class="col-md-6 card">
-	 		<div class="col-md-12 prof_header nopadding">Personal Information</div>
-	 		<div class="row">
-	 			<div class="col-md-6"><strong>E-Mail Address :</strong></div>
-	 			<div class="col-md-6">{{ profile.user.Email | dash}}</div>
-	 		</div>
-	 		<div class="row">
-	 			<div class="col-md-6"><strong>First Name :</strong></div>
-	 			<div class="col-md-6">{{ profile.user.FirstName | dash}}</div>
-	 		</div>
-	 		<div class="row">
-	 			<div class="col-md-6"><strong>Last Name :</strong></div>
-	 			<div class="col-md-6">{{ profile.user.LastName | dash}}</div>
-	 		</div>
-	 		<div class="row">
-	 			<div class="col-md-6"><strong>Street Address :</strong></div>
-	 			<div class="col-md-6">{{ profile.user.StreetAddress | dash}}</div>
-	 		</div>
-	 	</div>
-	 	<div class="col-md-6">.col-md-6</div>
-	 	<div class="col-md-6">.col-md-6</div>
-	 	<div class="col-md-6">.col-md-6</div>
-	 </div>
+    <div class="row remove_margin">
+        <div class="col-md-6 profile_card">
+            <form name="editProfile" novalidate>
+                <div class="col-md-12 prof_header nopadding">
+                    Personal Information
+                    <div>
+                        <span class="btn btn-warning" ng-hide="profile.form.isEdit" ng-click="profile.form.cancel()">EDIT</span>
+                        <span class="btn btn-warning" ng-show="profile.form.isEdit" ng-click="profile.form.save()">SAVE</span>
+                        <span class="btn btn-warning" ng-show="profile.form.isEdit" ng-click="profile.form.cancel()">CANCEL</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><strong>E-Mail Address :</strong></div>
+                    <div class="col-md-6" ng-class="{error : editProfile.email.$dirty && editProfile.email.$invalid}">
+                        <span ng-hide="profile.form.isEdit">{{ profile.user.Email | dash}}</span>
+                        <div ng-show="profile.form.isEdit">
+                            <input type="email" name="email" ng-model="profile.user.Email" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><strong>First Name :</strong></div>
+                    <div class="col-md-6">
+                        <span ng-hide="profile.form.isEdit">{{ profile.user.FirstName | dash}}</span>
+                        <div ng-show="profile.form.isEdit">
+                            <input type="text" ng-model="profile.user.FirstName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><strong>Last Name :</strong></div>
+                    <div class="col-md-6">
+                        <span ng-hide="profile.form.isEdit">{{ profile.user.LastName | dash}}</span>
+                        <div ng-show="profile.form.isEdit">
+                            <input type="text" ng-model="profile.user.LastName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><strong>Street Address :</strong></div>
+                    <div class="col-md-6">
+                        <span ng-hide="profile.form.isEdit">{{ profile.user.xp.streetAddress | dash}}</span>
+                        <div ng-show="profile.form.isEdit">
+                            <textarea ng-model="profile.user.xp.streetAddress">{{profile.user.StreetAddress}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 profile_card">
+            <form name="passwordForm" novalidate>
+                <div class="col-md-12 prof_header nopadding">
+                    Change Password
+                    <div>
+                        <span class="btn btn-warning" ng-hide="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">EDIT</span>
+                        <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.save()">SAVE</span>
+                        <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">CANCEL</span>
+                    </div>
+                    <div ng-hide="profile.passwordForm.isEdit">{{profile.passwordForm.password}}</div>
+                    <div ng-show="profile.passwordForm.isEdit"><input type="password" ng-model="profile.passwordForm.password"></div>
+                </div>
+            </form>
+        </div>
+    </div>
 </article>

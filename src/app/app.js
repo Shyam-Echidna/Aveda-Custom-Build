@@ -26,6 +26,7 @@ angular.module( 'orderCloud', [
     .factory('UserFactory', UserFactory)
 	.constant('ocscope', 'FullAccess')
 	.constant('appname', 'Aveda')
+    .constant('buyer','2')
 	
     
 	// Test
@@ -173,7 +174,7 @@ function RequestFactory($q, $rootScope, Auth) {
 RequestFactory.$inject = ["$q", "$rootScope", "Auth"];
 
 
-function UserFactory($http, $q, apiurl, $cookieStore, appname){
+function UserFactory($http, $q, apiurl, $cookieStore, appname, buyer){
 
     var permissions = {
         "CSR" : ["news","promotions","claims","client","profile"],
@@ -187,7 +188,8 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname){
         set : _setUser,
         remove : _remove,
         getUserType : _getUserType,
-        getPermissions : _getPermissions
+        getPermissions : _getPermissions,
+        saveUser : _saveUser
     };
     function _setUser(){
         var defferred = $q.defer();
@@ -202,6 +204,7 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname){
                 }
 
             }).success(function (data, status, headers, config) {
+                $cookieStore.put(appname + '.User', JSON.stringify(data));
                 defferred.resolve(data);
             }).error(function (data, status, headers, config) {
                 defferred.reject(data);
@@ -221,6 +224,27 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname){
         //console.log(permissions);
        // console.log(permissions['CSR']);
        return permissions[_getUserType()] || [];
+     }
+     function _saveUser(userO){
+        delete userO.TermsAccepted;
+        var defferred = $q.defer();
+        //return $resource(authurl, {}, { login: { method: 'POST'}}).login(data).$promise;
+        $http({
+
+                method: 'PATCH',
+                url: apiurl + '/buyers/'+ buyer +'/Users/'+userO.ID,
+                data: JSON.stringify(userO),
+                headers: {
+                    'Content-Type': 'application/JSON'
+                }
+
+            }).success(function (data, status, headers, config) {
+                //_setUser();
+                defferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                defferred.reject(data);
+            });
+            return defferred.promise;
      }
 }
 //UserFactory.$inject = ["$http", "$q", "apiurl", "$cookieStore", "appname"];

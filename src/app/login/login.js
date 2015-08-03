@@ -26,7 +26,6 @@ function LoginController($state,LoginFact, UserFactory, $cookieStore, appname) {
 	vm.submit = function(credentials){
 		LoginFact.Get(credentials).then(function(data){
 			UserFactory.set().then(function(data){				
-            	$cookieStore.put(appname + '.User', JSON.stringify(data));
 				$state.go( 'base.dashboard' );
 			});
 		},function(error){
