@@ -18,7 +18,7 @@
   flex-flow:column nowrap;
   background: linear-gradient(135deg, #c9cccb 0%,#ded5ce 63%,#ebebe8 100%);
   & > ui-view {
-    flex:1 0 auto;
+    flex:1 0 auto;flex:1 0 auto;
     max-width:1080px;
   }
   & > footer {
@@ -424,4 +424,7 @@ li ul.dpdwnThree{
 
 .searchRes *{
 vertical-align:middle;
+}
+#BaseMain > footer nav[am-layout] a{
+  flex: none !important;
 }

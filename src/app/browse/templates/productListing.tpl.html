@@ -1,11 +1,22 @@
 
-<article >
-<a class="sub-cat-item margin-left" ui-sref="base.productDetail({id: item.data.ID})" ng-repeat="item in newbrowse.products" >
-	<div >
-		<img ng-src="{{item.data.xp.images[0]}}">
-		<div ng-bind="item.data.Name" class="catName"></div>
-	
-		<button stop-event ="stop-event" id="quickview" class="quickview" ng-click="newbrowse.open(item.data.ID,$event)">Quick View</button>
+<article class="plp">
+<div class="sub-cat-item col-lg-4" ng-repeat="item in newbrowse.products" >
+	<div>
+ 
+		<img ng-src="{{item.xp.images[0]}}">
+    <div class="product_desc">
+      <h5 ng-bind="item.Name" class="catName"></h5>
+      <span>{{item.StandardPriceSchedule.PriceBreaks[0].Price | currency}}</span>
+    </div>	
+		<!-- <button stop-event ="stop-event" id="quickview" class="quickview" ng-click="newbrowse.open(item.data.ID,$event)">Quick View</button> -->
+    <div class="hover_btn">
+      <a href="#" stop-event ="stop-event" id="viewdetail" class="viewdetail" ui-sref="base.productDetail({id: item.ID})" >View Details</a>
+      <a href="#" stop-event ="stop-event" id="quickview" class="quickview" ng-click="newbrowse.open(item.ID,$event)">Quick View</a>
+    </div>
+    <div class="order_btn">
+      <input type="text" value="0"/>
+      <button>ADD TO ORDER</button>
+    </div>    
 	</div>
-</a>
+</div>
 </article>

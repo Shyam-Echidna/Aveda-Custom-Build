@@ -81,7 +81,7 @@ function newcontrlController($state, $stateParams, BrowseFact, lodash, $modal, $
 		}*/
 	});
 	BrowseFact.List($stateParams.id).then(function(items){
-		
+		console.log(items);
 		vm.products = items;
 	});
 
@@ -178,9 +178,12 @@ var service = {
                     		ajaxarr = [];
 							for(var i=0;i<prodArr.length;i++)
 						{
-							var promise = $http({ method: "GET", 
+							/*var promise = $http({ method: "GET", 
                 			url: "https://testapi.ordercloud.io/v1/products/"+prodArr[i] });
+							*/
+							var promise = _getProduct(prodArr[i]);
 							ajaxarr.push(promise);
+							console.log(promise);
 						}
                     	
                     	
@@ -195,17 +198,42 @@ var service = {
 
 			}
 
-			function _getProduct(productID){
+			function _getProduct(productID){				
 				var deferred = $q.defer();
-				$http({ method: "GET", 
+				var StandardPriceSchedule;
+					$http({ method: "GET", 
+                	url: "https://testapi.ordercloud.io/v1/products/assignments?productID="+productID,
+                	cache: true })
+                    .success(function (data, status, headers, config) {
+                    	
+                    	var StandardPriceScheduleID = data.Items[0].StandardPriceScheduleID;
+                    	$http({ method: "GET", 
+                	url: "https://testapi.ordercloud.io/v1/priceschedules/"+StandardPriceScheduleID,
+                	cache: true })
+                    .success(function (data, status, headers, config) {
+                    	StandardPriceSchedule = data;                    	
+                   $http({ method: "GET", 
                 	url: "https://testapi.ordercloud.io/v1/products/"+productID,
                 	cache: true })
                     .success(function (data, status, headers, config) {
+                    	data["StandardPriceSchedule"] = StandardPriceSchedule;
                    	 deferred.resolve(data)
                         
                     }).error(function (data, status, headers, config) {
                         deferred.reject(data);
                     });
+                        
+                    }).error(function (data, status, headers, config) {
+                      //  deferred.reject(data);
+                    });
+
+                   	 //deferred.resolve(data)
+                        
+                    }).error(function (data, status, headers, config) {
+                       // deferred.reject(data);
+                    });
+
+
 				return deferred.promise;
 			}
 			 function _getAllProducts() {

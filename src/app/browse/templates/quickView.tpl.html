@@ -15,8 +15,8 @@
                 <i ng-click="productInf.close()" class="rig">X</i>
                 <h1 class="pro_title">{{productInf.productInfo.Name}}</h1>
                 <p>Product Number: {{productInf.productInfo.ID}}</p>
-                <p>Retail Price:<span> $40.00</span></p>
-                <p>Salon Cost:<span>$45.00</span></p>
+                
+                <p>Salon Cost:<span>{{productInf.productInfo.StandardPriceSchedule.PriceBreaks[0].Price | currency}}</span></p>
                 <p>Free shipping with any invati purchase.</p>
                 <h4>BENIFITS</h4>
                 <div ng-bind-html="productInf.productInfo.Description"></div>

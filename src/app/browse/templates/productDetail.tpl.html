@@ -11,9 +11,8 @@
             <div>
               
                 <h1 class="pro_title">{{prodDetail.prodDetails.Name}}</h1>
-                <p>Product Number: {{prodDetail.prodDetails.ID}}</p>
-                <p>Retail Price:<span> $40.00</span></p>
-                <p>Salon Cost:<span>$45.00</span></p>
+                <p>Product Number: {{prodDetail.prodDetails.ID}}</p>                
+                <p>Salon Cost:<span>{{prodDetail.prodDetails.StandardPriceSchedule.PriceBreaks[0].Price | currency}}</span></p>
                 	<div>
         <input type="text" value="0">
         <button class="btn btn-warning">Add To Cart</button>    
