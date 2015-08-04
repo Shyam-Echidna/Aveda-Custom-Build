@@ -3,14 +3,14 @@
         <div class="col-md-6 profile_card">
             <form name="editProfile" novalidate>
                 <div class="col-md-12 prof_header nopadding">
-                    Personal Information
-                    <div>
+                    <span>PERSONAL INFORMATION</span>
+                    <div class="personal_info_btn">
                         <span class="btn btn-warning" ng-hide="profile.form.isEdit" ng-click="profile.form.cancel()">EDIT</span>
                         <span class="btn btn-warning" ng-show="profile.form.isEdit" ng-click="profile.form.save()">SAVE</span>
                         <span class="btn btn-warning" ng-show="profile.form.isEdit" ng-click="profile.form.cancel()">CANCEL</span>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row personal_detail">
                     <div class="col-md-6"><strong>E-Mail Address :</strong></div>
                     <div class="col-md-6" ng-class="{error : editProfile.email.$dirty && editProfile.email.$invalid}">
                         <span ng-hide="profile.form.isEdit">{{ profile.user.Email | dash}}</span>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row personal_detail">
                     <div class="col-md-6"><strong>First Name :</strong></div>
                     <div class="col-md-6">
                         <span ng-hide="profile.form.isEdit">{{ profile.user.FirstName | dash}}</span>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row personal_detail">
                     <div class="col-md-6"><strong>Last Name :</strong></div>
                     <div class="col-md-6">
                         <span ng-hide="profile.form.isEdit">{{ profile.user.LastName | dash}}</span>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row personal_detail">
                     <div class="col-md-6"><strong>Street Address :</strong></div>
                     <div class="col-md-6">
                         <span ng-hide="profile.form.isEdit">{{ profile.user.xp.streetAddress | dash}}</span>
@@ -51,12 +51,15 @@
         <div class="col-md-6 profile_card">
             <form name="passwordForm" novalidate>
                 <div class="col-md-12 prof_header nopadding">
-                    Change Password
-                    <div>
-                        <span class="btn btn-warning" ng-hide="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">EDIT</span>
+                    <span>PASSWORD</span>
+                    <div class="pass_btn">
+                        <span class="btn btn-warning" ng-hide="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">CHANGE PASSWORD</span>
                         <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.save()">SAVE</span>
                         <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">CANCEL</span>
                     </div>
+                    
+                </div>
+                <div class="pass_feild">
                     <div ng-hide="profile.passwordForm.isEdit">{{profile.passwordForm.password}}</div>
                     <div ng-show="profile.passwordForm.isEdit"><input type="password" ng-model="profile.passwordForm.password"></div>
                 </div>
