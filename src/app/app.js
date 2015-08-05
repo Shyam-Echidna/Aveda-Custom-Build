@@ -15,7 +15,8 @@ angular.module( 'orderCloud', [
     'orderCloud.browse',
 	'Login',
     'orderCloud.profile',
-    'orderCloud.promotions'
+    'orderCloud.promotions',
+    'orderCloud.salons'
 ])
 
 	.config( Routing )
@@ -32,7 +33,7 @@ angular.module( 'orderCloud', [
 	// Test
 	 .constant('authurl', 'https://testauth.ordercloud.io/oauth/token')
 	 .constant('apiurl', 'https://testapi.ordercloud.io/v1')
-     //.constant('clientid', '018ddfbd-aff8-413a-8518-f45fc774619b')   
+     // .constant('clientid', '018ddfbd-aff8-413a-8518-f45fc774619b')   
 	 .constant('clientid', '9ccce69a-e612-4856-bf54-d3d8924f02d6')	 
 	 .config(Interceptor)
 ;

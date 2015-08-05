@@ -35,7 +35,7 @@ console.log("myUsersDetails",myUsersDetails);
     console.log("myCache===",myCache.get("https://testapi.ordercloud.io/v1/buyers/2/categories/productassignments?categoryID=_pgtwwnsRky5X3zwuKwqRw"));*/
 }
 
-function MyusersFactory($http,$q,$cacheFactory, myCache){
+function MyusersFactory($http,$q,$cacheFactory, myCache,buyer){
 
         return {
           
@@ -49,7 +49,7 @@ function MyusersFactory($http,$q,$cacheFactory, myCache){
                     console.log('else');
                 var deferred = $q.defer();              
                 $http({ method: "GET",                    
-                	url: "https://testapi.ordercloud.io/v1/buyers/1/users", 
+                	url: "https://testapi.ordercloud.io/v1/buyers/"+buyer+"/users", 
                     cache: true
                 })
                     .success(function (data, status, headers, config) {

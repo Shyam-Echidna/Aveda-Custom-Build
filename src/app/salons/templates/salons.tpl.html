@@ -1,0 +1,22 @@
+<article class="profile-box">
+   <table class="table table-hover" ng-if="salons.salonDetails.length">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Salon ID</th>
+        <th>Location</th>
+        <th>Claims</th>
+        <th>Order Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="salon in salons.salonDetails">
+       <td>{{salon.Name}}</td>
+       <td>{{salon.ID}}</td>
+       <td ng-bind-html="salon.xp.Location"></td>
+       <td>Claims</td>
+       <td>Order Status</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
