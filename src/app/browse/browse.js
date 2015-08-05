@@ -67,6 +67,7 @@ function newcontrlController($state, $stateParams, BrowseFact, lodash, $modal, $
 	BrowseFact.getAll().then(function (items) {
 		categories = unflatten(items.Items);
 		vm.catDetails = feachele(categories, $stateParams.id);
+    console.log(vm.catDetails);
 		
 		if(!vm.catDetails.children.length){
 			
