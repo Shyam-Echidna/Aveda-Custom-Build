@@ -1,5 +1,5 @@
 <nav am-layout="vertical aveda-left-nav">
-	<a href="#"><img src="assets/images/aveda_logo_white.png" alt="Aveda"></a>
+	<a ui-sref-active="active" ui-sref="base.dashboard"><img src="assets/images/aveda_logo_white.png" alt="Aveda"></a>
 	<a ui-sref-active="active" ui-sref="base.news" ng-show="base.hasPermission('news')"><i class="fa fa-newspaper-o"></i> News <recent-news></recent-news></a>
 	<a ui-sref-active="active" ui-sref="base.promotions" ng-show="base.hasPermission('promotions')"><i class="fa fa-bullhorn"></i> Promotions</a>
 	<a ui-sref-active="active" ui-sref="base.profile" ng-show="base.hasPermission('profile')"><i class="fa fa-cog"></i> My Profile</a>

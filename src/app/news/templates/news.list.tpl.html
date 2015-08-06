@@ -3,11 +3,11 @@
 <section class="news-summary" am-padding ng-repeat="item in newsList.articles  | orderBy:'-item.Article.Timestamp'">
 <img src="http://c3e308.medialib.glogster.com/media/a8/a8a548e90608f257858e20c3a85ccbf03cae6c4f07eb85ca751d82e0c643de70/gray-box.jpg" style="float:left;width:150px;height:150px;"> 
 <div class="w180Con">
-	<header am-margin="bottom" ui-sref=".detail({id: item.ID})">
+	<header am-margin="bottom" ui-sref="base.newsdetail({id: item.ID})">
 		<h4>{{item.Article.Title}}</h4>
 		<p>{{item.Article.Timestamp | date:'shortDate'}}</p>
 	</header>
 	<div ng-model="item.Article.Body" ng-bind-html="item.Article.Body"></div>
-	<a ui-sref=".detail({id: item.ID})"><b>READ MORE</b></a>
+	<a ui-sref="base.newsdetail({id: item.ID})"><b>READ MORE</b></a>
 	</div>
 </section>

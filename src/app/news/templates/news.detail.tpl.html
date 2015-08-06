@@ -1,7 +1,8 @@
 <section class="news-article" am-padding="large">
 	<header am-margin="bottom">
-		<h3>{{newsDetail.item.Article.Title}}</h3>
-		<p>{{newsDetail.item.Article.Timestamp | date:'shortDate'}}</p>
+	
+		<h3>{{newsDetail.articles.Title}}</h3>
+		<p>{{newsDetail.articles.Timestamp | date:'shortDate'}}</p>
 	</header>
-	<div ta-bind ng-model="newsDetail.item.Article.Body"></div>
+	<div  ng-model="newsDetail.articles.Body" ng-bind-html="newsDetail.articles.Body"></div>
 </section>
