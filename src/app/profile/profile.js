@@ -3,6 +3,7 @@ angular.module( 'orderCloud.profile',[] )
 	.config( ProfileConfig )
 	.controller( 'profileController', ProfileController )
 	.filter( 'dash', dashFilter )
+	.factory( 'profileFactory', profileFactory )
 
 ;
 
@@ -21,7 +22,7 @@ function ProfileConfig( $stateProvider ) {
 	});
 }
 
-function ProfileController(userDetails, UserFactory) {
+function ProfileController(userDetails, UserFactory, profileFactory) {
 	var vm = this;
 	var userTmp = userDetails;
 	vm.user = angular.copy(userDetails);
@@ -52,9 +53,24 @@ function ProfileController(userDetails, UserFactory) {
 			return (this.password !== '*******') ? this.password : "" ;
 		},
 		save : function(){
-			UserFactory.saveUser({ ID : vm.user.ID , password : this.getPassword() }).then(function(data){
+			// UserFactory.saveUser({ ID : vm.user.ID , password : this.getPassword() }).then(function(data){
+			// 	vm.passwordForm.cancel();
+			// 	alert("Password Changed");
+			// });
+			console.log(vm.user);
+			var tmpObj = {
+				username : vm.user.Username,
+				ID : vm.user.ID,
+				oldPass : vm.passwordForm.curPass,
+				newPass : vm.passwordForm.cnfPass
+			} ;
+			//return;
+			profileFactory.changePassword(tmpObj).then(function(){
+				delete vm.passwordForm.error;
 				vm.passwordForm.cancel();
 				alert("Password Changed");
+			}).catch(function(data){
+				vm.passwordForm.error = data.error;
 			});
 		}
 	};
@@ -64,4 +80,22 @@ function dashFilter() {
 	return function(input){
 		return input || '---';
 	};
+}
+
+function profileFactory($q, LoginFact, UserFactory){
+	return {
+		changePassword : _changePassword
+	};
+	function _changePassword(userObj){
+		var defferred = $q.defer();
+		LoginFact.Get({ Username : userObj.username, Password : userObj.oldPass }).then(function(data){
+			UserFactory.savePassword({ ID : userObj.ID, Password : userObj.newPass })
+			.then(function(data){
+				defferred.resolve("password changed");
+			});
+		}).catch(function(data){
+			defferred.reject(data);
+		});
+		return defferred.promise;
+	}
 }

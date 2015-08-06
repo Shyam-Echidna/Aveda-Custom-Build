@@ -190,7 +190,8 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname, buyer){
         remove : _remove,
         getUserType : _getUserType,
         getPermissions : _getPermissions,
-        saveUser : _saveUser
+        saveUser : _saveUser,
+        savePassword : _savePassword
     };
     function _setUser(){
         var defferred = $q.defer();
@@ -246,6 +247,9 @@ function UserFactory($http, $q, apiurl, $cookieStore, appname, buyer){
                 defferred.reject(data);
             });
             return defferred.promise;
+     }
+     function _savePassword(userO){
+        return _saveUser(userO);
      }
 }
 //UserFactory.$inject = ["$http", "$q", "apiurl", "$cookieStore", "appname"];

@@ -54,14 +54,29 @@
                     <span>PASSWORD</span>
                     <div class="pass_btn">
                         <span class="btn btn-warning" ng-hide="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">CHANGE PASSWORD</span>
-                        <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.save()">SAVE</span>
+                        <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.save()" ng-disabled="!((profile.passwordForm.cnfPass == profile.passwordForm.newPass && profile.passwordForm.newPass != '') && profile.passwordForm.curPass)">SAVE</span>
                         <span class="btn btn-warning" ng-show="profile.passwordForm.isEdit" ng-click="profile.passwordForm.cancel()">CANCEL</span>
                     </div>
-                    
                 </div>
                 <div class="pass_feild">
-                    <div ng-hide="profile.passwordForm.isEdit">{{profile.passwordForm.password}}</div>
-                    <div ng-show="profile.passwordForm.isEdit"><input type="password" ng-model="profile.passwordForm.password"></div>
+                    <div ng-hide="profile.passwordForm.isEdit">Password: {{profile.passwordForm.password}}</div>
+                    <!-- <div><input type="password" ng-model="profile.passwordForm.password"></div>-->
+                    <div class="col-md-12" ng-show="profile.passwordForm.isEdit">
+                    <form></form>
+                        <div class="row">
+                            <div class="col-md-6"><strong>Current Password: </strong></div>
+                            <div class="col-md-6"><input type="password" ng-model="profile.passwordForm.curPass"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><strong>New Password: </strong></div>
+                            <div class="col-md-6"><input type="password" ng-model="profile.passwordForm.newPass"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><strong>Confirm Password: </strong></div>
+                            <div class="col-md-6"><input type="password" ng-model="profile.passwordForm.cnfPass"/></div>
+                        </div>
+                        <div class="row" ng-show="profile.passwordForm.error">{{profile.passwordForm.error}}</div>
+                    </div>
                 </div>
             </form>
         </div>
